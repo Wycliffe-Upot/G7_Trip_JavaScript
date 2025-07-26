@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Staggered Message</title>
+  <style>
+    body {
+      background-color: #f9f9f9;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .message {
+      font-size: 24px;
+      font-weight: 500;
+      line-height: 1.6;
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 700px;
+      gap: 8px;
+    }
+
+    .word {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease;
+    }
+
+    .word.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Optional: random pastel color per word */
+    .word:nth-child(3n)   { color: #008080; }
+    .word:nth-child(4n)   { color: #cc6600; }
+    .word:nth-child(5n)   { color: #0066cc; }
+    .word:nth-child(6n)   { color: #9933cc; }
+    .word:nth-child(7n)   { color: #e6005c; }
+  </style>
+</head>
+<body>
+
+  <div class="message" id="message"></div>
+
+  <script>
+    const message = "No Photos and Videos yet, They will be uploaded on the material days of the visit.";
+    const words = message.split(" ");
+    const container = document.getElementById("message");
+
+    // Create word elements
+    words.forEach((word, index) => {
+      const span = document.createElement("span");
+      span.textContent = word;
+      span.classList.add("word");
+      container.appendChild(span);
+
+      // Add staggered visibility
+      setTimeout(() => {
+        span.classList.add("visible");
+      }, index * 250); // 250ms delay between words
+    });
+  </script>
+
+</body>
+</html>
